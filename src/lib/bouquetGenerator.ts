@@ -5,7 +5,6 @@
 
 const FLOWER_HEIGHT = 150;
 const FLOWER_OVERLAP = 0.35; // 35% overlap
-const MAX_SIZE = 1024 * 1024; // 1MB
 
 /**
  * Load an image from URL into a canvas

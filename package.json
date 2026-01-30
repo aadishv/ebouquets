@@ -4,27 +4,21 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bun --hot src/serve.ts",
-    "build": "tsc -b",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
     "lint": "eslint ."
   },
   "dependencies": {
     "@base-ui/react": "^1.1.0",
     "@fontsource-variable/nunito-sans": "^5.2.7",
     "@fontsource/quicksand": "^5.2.10",
-    "@hono/zod-validator": "^0.7.6",
-    "@imgly/background-removal-node": "^1.4.5",
     "@phosphor-icons/react": "^2.1.10",
     "@xstate/store": "^3.15.0",
-    "bun-plugin-tailwind": "^0.1.2",
-    "canvas": "^3.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eml-generator": "^1.0.0",
-    "express": "^5.2.1",
     "file-saver": "^2.0.5",
-    "fs-extra": "^11.3.3",
-    "hono": "^4.11.7",
     "jszip": "^3.10.1",
     "mdui": "^2.1.4",
     "papaparse": "^5.5.3",
@@ -41,15 +35,13 @@
     "@types/papaparse": "^5.5.2",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^16.5.0",
     "mprocs": "^0.8.3",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.4"
-  },
-  "trustedDependencies": [
-    "canvas",
-    "onnxruntime-node"
-  ]
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.3.1"
+  }
 }
