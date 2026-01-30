@@ -23,9 +23,63 @@ import 'mdui/components/collapse.js';
 import 'mdui/components/collapse-item.js';
 import 'mdui/components/dialog.js';
 
-const generateHtml = (email: string, orders: ProcessedFlowerOrder[]) => {
+type EmlAttachment = {
+  filename?: string;
+  name?: string;
+  contentType?: string;
+  inline?: boolean;
+  cid?: string;
+  data: string | Uint8Array;
+};
+
+type EmailBuildResult = {
+  html: string;
+  attachments: EmlAttachment[];
+};
+
+const parseDataUrl = (dataUrl: string) => {
+  const match = dataUrl.match(/^data:([^;]+);base64,(.+)$/);
+  if (!match) return null;
+  return { contentType: match[1], base64Data: match[2] };
+};
+
+const buildEmail = (email: string, orders: ProcessedFlowerOrder[]): EmailBuildResult => {
   const name = orders[0]?.name || email;
-  return `
+  const attachments: EmlAttachment[] = [];
+
+  const orderHtml = orders
+    .map((order, index) => {
+      let bouquetHtml = '';
+      if (order.bouquetImage) {
+        const parsed = parseDataUrl(order.bouquetImage);
+        if (parsed) {
+          const cid = `bouquet-${index}-${Date.now().toString(16)}-${Math.random().toString(16).slice(2)}`;
+          const extension = parsed.contentType.split("/")[1] || "jpg";
+          attachments.push({
+            filename: `bouquet-${index}.${extension}`,
+            contentType: parsed.contentType,
+            inline: true,
+            cid,
+            data: atob(parsed.base64Data)
+          });
+          bouquetHtml = `
+            <div class="bouquet-container">
+              <img src="cid:${cid}" alt="Bouquet" style="max-width: 100%; height: auto;">
+            </div>
+          `;
+        }
+      }
+
+      return `
+        <div class="order-unit">
+          ${bouquetHtml}
+          <div class="message-text">"${order.message}"</div>
+        </div>
+      `;
+    })
+    .join("");
+
+  const html = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,22 +108,15 @@ const generateHtml = (email: string, orders: ProcessedFlowerOrder[]) => {
     </div>
     <p>Check out these messages sent to you:</p>
     <div class="divider">---</div>
-    ${orders.map((order) => `
-      <div class="order-unit">
-        ${order.bouquetImage ? `
-          <div class="bouquet-container">
-            <img src="${order.bouquetImage}" alt="Bouquet" style="max-width: 100%; height: auto;">
-          </div>
-        ` : ''}
-        <div class="message-text">"${order.message}"</div>
-      </div>
-    `).join('')}
+    ${orderHtml}
     <div style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; text-align: center; font-size: 14px; color: #999;">
       sent with &lt;3 from Pixel the Pixel
     </div>
   </div>
 </body>
 </html>`;
+
+  return { html, attachments };
 };
 
 export default function App() {
@@ -129,21 +176,25 @@ export default function App() {
     
     if (entries.length === 1) {
       const [email, orders] = entries[0]
+      const { html, attachments } = buildEmail(email, orders)
       const blob = new Blob([eml({
         from: "noreply@example.com",
         to: email,
         subject: "Valentine's Day Surprise!",
-        html: generateHtml(email, orders)
+        html,
+        attachments
       })], { type: "message/rfc822" })
       saveAs(blob, `${email.replace(/[^a-z0-9]/gi, '_')}.eml`)
     } else {
       const zip = new JSZip()
       for (const [email, orders] of entries) {
+        const { html, attachments } = buildEmail(email, orders)
         zip.file(`${email.replace(/[^a-z0-9]/gi, '_')}.eml`, eml({
           from: "noreply@example.com",
           to: email,
           subject: "Valentine's Day Surprise!",
-          html: generateHtml(email, orders)
+          html,
+          attachments
         }))
       }
       const blob = await zip.generateAsync({ type: "blob" })
