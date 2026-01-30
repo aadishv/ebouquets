@@ -1,6 +1,16 @@
-flower type,message,to
-rose,Happy Valentine's Day! Hope you have a wonderful day filled with love.,mail@aadishv.dev
-lily,Thinking of you on this special day. You're amazing!,mail@aadishv.dev
-gardenia,To a very special Pixel. Keep shining!,mail@aadishv.dev
-rose,Roses are red... and you are the best!,mail@aadishv.dev
-lily,Sending lots of love and good vibes your way!,mail@aadishv.dev
+flower type,message,to,name
+"<p>Rose: Love</p><p><img src=""/rose.png""></p>",Single rose for you!,aadish@ohs.stanford.edu,Aadish
+"""<p>Rose: Love</p><p><img src=""""/rose.png""""></p>"",""<p>Orange Tulip: Connection</p><p><img src=""""/tulip.png""""></p>""",A rose and a tulip!,mail@aadishv.dev,Aadish
+"""<p>Rose: Love</p><p><img src=""""/rose.png""""></p>"",""<p>Orange Tulip: Connection</p><p><img src=""""/tulip.png""""></p>"",""<p>Blue Cornflower: Hope</p><p><img src=""""/cornflower.png""""></p>"",""<p>Gardenia: Joy</p><p><img src=""""/gardenia.png""""></p>"",""<p>White Dandelion: Wishes</p><p><img src=""""/dandelion.png""""></p>""",The full bouquet!,aadish@ohs.stanford.edu,Aadish
+"""<p>White Dandelion: Wishes</p><p><img src=""""/dandelion.png""""></p>"",""<p>White Dandelion: Wishes</p><p><img src=""""/dandelion.png""""></p>"",""<p>White Dandelion: Wishes</p><p><img src=""""/dandelion.png""""></p>""",Oops all dandelions!,mail@aadishv.dev,Aadish
+"<p>Rose: Love</p><p><img src=""/rose.png""></p>",First message,aadish@ohs.stanford.edu,Aadish
+"<p>Gardenia: Joy</p><p><img src=""/gardenia.png""></p>",Second message,mail@aadishv.dev,Aadish
+"<p>Rose: Love</p><p><img src=""/rose.png""></p>",Message 1,alice@example.com,Alice
+"<p>Gardenia: Joy</p><p><img src=""/gardenia.png""></p>",Message 2,alice@example.com,Alice
+"<p>Orange Tulip: Connection</p><p><img src=""/tulip.png""></p>",Message 3,alice@example.com,Alice
+"<p>Blue Cornflower: Hope</p><p><img src=""/cornflower.png""></p>",Message 1,bob@example.com,Bob
+"<p>White Dandelion: Wishes</p><p><img src=""/dandelion.png""></p>",Message 2,bob@example.com,Bob
+"<p>Rose: Love</p><p><img src=""/rose.png""></p>",Message 3,bob@example.com,Bob
+"<p>Gardenia: Joy</p><p><img src=""/gardenia.png""></p>",Message 1,charlie@example.com,Charlie
+"<p>Orange Tulip: Connection</p><p><img src=""/tulip.png""></p>",Message 2,charlie@example.com,Charlie
+"<p>Blue Cornflower: Hope</p><p><img src=""/cornflower.png""></p>",Message 3,charlie@example.com,Charlie
