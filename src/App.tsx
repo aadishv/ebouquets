@@ -180,7 +180,7 @@ export default function App() {
       const blob = new Blob([eml({
         from: "noreply@example.com",
         to: email,
-        subject: "Valentine's Day Surprise!",
+        subject: "eBouquets!",
         html,
         attachments
       })], { type: "message/rfc822" })
@@ -192,7 +192,7 @@ export default function App() {
         zip.file(`${email.replace(/[^a-z0-9]/gi, '_')}.eml`, eml({
           from: "noreply@example.com",
           to: email,
-          subject: "Valentine's Day Surprise!",
+          subject: "eBouquets!",
           html,
           attachments
         }))
